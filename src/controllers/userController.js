@@ -7,7 +7,7 @@ const createUser = async function (abcd, xyz) {
   //the second parameter is always the response
   let data = abcd.body;
   let savedData = await userModel.create(data);
-  console.log(abcd.newAtribute);
+  //console.log(abcd.newAtribute);
   xyz.send({ msg: savedData });
 };
 
@@ -34,7 +34,7 @@ const loginUser = async function (req, res) {
       batch: "thorium",
       organisation: "FUnctionUp",
     },
-    "functionup-thorium"
+    " "
   );
   res.setHeader("x-auth-token", token);
   res.send({ status: true, data: token });
@@ -70,7 +70,7 @@ const updateUser = async function (req, res) {
 // Do the same steps here:
 // Check if the token is present
 // Check if the token present is a valid token
-// Return a different error message in both these cases
+// Return a different error message in both these cases 
 
   let userId = req.params.userId;
   let user = await userModel.findById(userId);
@@ -83,6 +83,22 @@ const updateUser = async function (req, res) {
   let updatedUser = await userModel.findOneAndUpdate({ _id: userId }, userData);
   res.send({ status: updatedUser, data: updatedUser });
 };
+
+
+//Assignment
+
+let registerUser = async function(req,res){
+  let userName = req.body.emailId;
+  let password = req.body.password;
+
+  let user = await userModel.findOne({emailId: userName});
+  if(user){
+    return res.send({msg: "email already exists"})
+  }else{
+
+  }
+  
+}
 
 module.exports.createUser = createUser;
 module.exports.getUserData = getUserData;
